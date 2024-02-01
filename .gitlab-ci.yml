@@ -1,0 +1,19 @@
+stages: # List of stages for jobs, and their order of execution
+  - clean
+  - build-dev
+
+build-dev:
+  stage: build-dev
+  only:
+    - develop
+  before_script:
+    - npm clean-install --legacy-peer-deps
+    - npm run build
+  script:
+    - docker-compose build
+    - docker-compose -f docker-compose.yml up
+
+clean:
+  stage: clean
+  script:
+    - docker image prune -f

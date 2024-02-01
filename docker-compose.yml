@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  app:
+    container_name: app-dev-v1
+    image: app-dev-api
+    build:
+      context: .
+      # target: development
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 30095:30095
